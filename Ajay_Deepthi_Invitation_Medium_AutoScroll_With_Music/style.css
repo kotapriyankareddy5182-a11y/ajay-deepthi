@@ -1,0 +1,183 @@
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: auto;
+  background: #ead8b7;
+}
+
+body {
+  margin: 0;
+  background: #ead8b7;
+  overflow-x: hidden;
+}
+
+/* Opening screen: the supplied 01-cover.jpeg stays unchanged. */
+.opening {
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #ead8b7;
+}
+
+/* Keeps the exact 900x1600 portrait proportions and gives us a frame
+   for positioning the HTML button without editing the image itself. */
+.cover-frame {
+  position: relative;
+  width: min(100vw, 56.25svh);
+  height: min(100svh, 177.7778vw);
+  aspect-ratio: 9 / 16;
+  flex: 0 0 auto;
+}
+
+.cover-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* RIGHT-SIDE BUTTON
+   It is intentionally away from the couple on the left. */
+.open-btn {
+  position: absolute;
+  left: 70%;
+  top: 68%;
+  transform: translate(-50%, -50%);
+  width: 42%;
+  min-width: 150px;
+  max-width: 245px;
+  min-height: 48px;
+  padding: 11px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  color: #fffaf0;
+  background: rgba(76, 35, 28, 0.92);
+  box-shadow: 0 8px 24px rgba(40, 20, 5, 0.30), inset 0 0 0 1px rgba(218, 173, 103, .35);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: clamp(13px, 2.2vw, 17px);
+  letter-spacing: .2px;
+  cursor: pointer;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  white-space: nowrap;
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.open-btn:hover,
+.open-btn:focus-visible {
+  transform: translate(-50%, -52%) scale(1.025);
+  background: rgba(99, 45, 35, .96);
+  box-shadow: 0 10px 28px rgba(40, 20, 5, .34), inset 0 0 0 1px rgba(238, 196, 126, .55);
+  outline: none;
+}
+
+.open-btn .heart {
+  font-size: 21px;
+  line-height: 1;
+}
+
+.tap-hint {
+  position: absolute;
+  left: 70%;
+  top: calc(68% + 35px);
+  transform: translateX(-50%);
+  z-index: 5;
+  color: #fffaf0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(11px, 1.8vw, 14px);
+  letter-spacing: 1px;
+  text-shadow: 0 2px 7px rgba(50, 20, 5, .75);
+  white-space: nowrap;
+}
+
+.invitation {
+  display: none;
+  width: 100%;
+  background: #ead8b7;
+}
+
+.invitation.visible { display: block; }
+
+.pages {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  line-height: 0;
+  background: #ead8b7;
+}
+
+.page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.controls {
+  position: fixed;
+  right: 14px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 20;
+  display: none;
+  gap: 8px;
+}
+
+.controls.visible { display: flex; }
+
+.controls button {
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 50%;
+  background: rgba(57,30,17,.68);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 600px) {
+  .cover-frame {
+    width: 100vw;
+    height: 177.7778vw;
+    max-height: 100svh;
+  }
+
+  .open-btn {
+    left: 70%;
+    top: 67%;
+    width: 44%;
+    min-width: 140px;
+    min-height: 44px;
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .tap-hint {
+    left: 70%;
+    top: calc(67% + 33px);
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .open-btn { transition: none; }
+}
